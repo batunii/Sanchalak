@@ -7,6 +7,8 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * Service
  */
@@ -17,14 +19,17 @@ import com.redmark.Sanchalak.Entity.Request;
 
 @org.springframework.stereotype.Service
 public class Service {
+	@Autowired
+	SanchConsts consts;
+
 	Request getRequest = new Request();
 
 	public String getResponse(String query) throws Exception {
 		Gson gson = new Gson();
-		String[] requestHeaders = { "Authorization", "Bearer " + SanchConsts.API_KEY,
+		String[] requestHeaders = { "Authorization", "Bearer " + consts.getAPI_KEY(),
 				"Content-Type", "application/json" };
 		getRequest.setRequestHeaders(requestHeaders);
-		URI apiUri = new URI(SanchConsts.LLM_URI);
+		URI apiUri = new URI(consts.getLLM_URI());
 		HttpRequest gRequest = HttpRequest.newBuilder()
 				.uri(apiUri).headers(getRequest.getRequestHeaders()).POST(BodyPublishers.ofString(
 						gson.toJson(getRequest.getPayLoad(query))))

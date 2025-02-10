@@ -1,9 +1,36 @@
 package com.redmark.Sanchalak;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+
+import jakarta.annotation.Resource;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 /**
  * Constants
  */
+@NoArgsConstructor
+@Configuration
+@PropertySource("classpath:application.properties")
 public class SanchConsts {
-	public static final String API_KEY = "";
-	public static final String LLM_URI = "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct";
+	@Resource
+	public Environment env;
+
+	private String API_KEY;
+	private String LLM_URI;
+
+	public String getAPI_KEY() {
+		API_KEY = env.getProperty("huggingface.api.key");
+		return API_KEY;
+	}
+
+	public String getLLM_URI() {
+		LLM_URI = env.getProperty("huggingface.api.url");
+		return LLM_URI;
+	}
 }
