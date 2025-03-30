@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,7 +36,7 @@ public class Controller {
 	@CrossOrigin
 	public ResponseEntity<String> getQuery(@RequestBody Query query) {
 		try {
-			return new ResponseEntity<>(service.getResponse(query.getMessage()), HttpStatus.OK);
+			return new ResponseEntity<>(service.getResponse(query), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

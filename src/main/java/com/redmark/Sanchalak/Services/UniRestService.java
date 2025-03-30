@@ -27,7 +27,7 @@ public class UniRestService {
 		HttpResponse<String> response = Unirest.post(consts.getLLM_URI())
   .header("Content-Type", "application/json")
   .header("Authorization", "Bearer "+consts.getAPI_KEY())
-  .body("{\n    \"inputs\": \"<|begin_of_text|><|start_header_id|>system<|end_header_id|>You are a helpful and smart assistant. You accurately provide answer to the provided user query.<|eot_id|><|start_header_id|>user<|end_header_id|> Here is the query :"+query+". Provide precise and concise answer.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\",\n    \"parameters\": {\n        \"max_new_tokens\": 5000,\n        \"temperature\": 0.01,\n        \"top_k\": 50,\n        \"top_p\": 0.95,\n        \"return_full_text\": false\n    }\n}").asString();
+  .body("{\n \"messages\": \n  ").asString();
   
 System.out.println("{\n    \"inputs\": \"<|begin_of_text|><|start_header_id|>system<|end_header_id|>You are a helpful and smart assistant. You accurately provide answer to the provided user query.<|eot_id|><|start_header_id|>user<|end_header_id|> Here is the query :"+query+". Provide precise and concise answer.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\",\n    \"parameters\": {\n        \"max_new_tokens\": 5000,\n        \"temperature\": 0.01,\n        \"top_k\": 50,\n        \"top_p\": 0.95,\n        \"return_full_text\": false\n    }\n}");
 		return response.getBody();

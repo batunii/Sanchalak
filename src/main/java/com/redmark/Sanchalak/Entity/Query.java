@@ -11,8 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Query {
-
+	private String prefix = "";
 	private String message;
-	private String otherThings;
-	
+	private String postfix = "";
+	private String model;
+
+	public String getQuery() {
+		return prefix + " .\n" + message + " .\n" + postfix;
+	}
+
 }
